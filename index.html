@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomus - Find Your Perfect Roommate</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="nl">Nederlands</option>
+        </select>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Roomus</a>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="contact.html">Contact</a>
+                <a href="#premium" class="btn btn-upgrade" id="nav-premium-btn">
+                    <i class="fas fa-crown"></i> Go Premium
+                </a>
+                <a href="app/login.html" class="btn btn-primary">Find Roommates</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Perfect Roommate</h1>
+                <p>Connect with compatible roommates based on your lifestyle, interests, and preferences.</p>
+                <div class="cta-buttons">
+                    <a href="app/register.html" class="btn btn-primary">Get Started</a>
+                    <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Happy roommates">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Roomus?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Smart Matching</h3>
+                    <p>Our algorithm matches you with compatible roommates based on your preferences and lifestyle.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Verified Profiles</h3>
+                    <p>All users are verified to ensure a safe and trustworthy community.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Easy Communication</h3>
+                    <p>Chat with potential roommates directly through our platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Your Profile</h3>
+                    <p>Tell us about yourself, your lifestyle, and what you're looking for in a roommate.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Find Matches</h3>
+                    <p>We'll show you compatible roommates based on your preferences.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Connect & Meet</h3>
+                    <p>Chat with your matches and arrange to meet your perfect roommate!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="rooms">
+        <div class="container">
+            <h2>Available Rooms</h2>
+            <div class="rooms-grid">
+                <!-- Regular Room -->
+                <a href="app/rooms/room1.html" class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="Room 1">
+                        <div class="room-overlay">
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="room-info">
+                        <h3>Modern Apartment in City Center</h3>
+                        <p class="price">€850/month</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Amsterdam</p>
+                    </div>
+                </a>
+
+                <!-- Premium Room -->
+                <a href="app/rooms/room-premium.html" class="room-card premium-listing">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811" alt="Premium Apartment">
+                        <div class="room-overlay">
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="room-info">
+                        <h3>Luxury Loft with City View <span class="premium-badge">Premium</span></h3>
+                        <p class="price">€1,200/month</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Amsterdam South</p>
+                    </div>
+                </a>
+                <!-- More room cards would go here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Success Stories</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p>"Found my perfect roommate through Roomus! We've been living together for 6 months now and it's been amazing."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah">
+                        <div>
+                            <h4>Sarah J.</h4>
+                            <p>Student, Amsterdam</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- More testimonials would go here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Features Section -->
+    <section id="premium" class="premium-section">
+        <div class="premium-container">
+            <div class="premium-card">
+                <h2 data-translate="cta.premium.title">Upgrade to Premium</h2>
+                <p data-translate="cta.premium.subtitle">Get access to exclusive features and better matches</p>
+                <div class="premium-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span data-translate="cta.premium.features.0">Unlimited messages to potential roommates</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span data-translate="cta.premium.features.1">Advanced search filters</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span data-translate="cta.premium.features.2">Verified badge on your profile</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span data-translate="cta.premium.features.3">Priority listing in search results</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check"></i>
+                        <span data-translate="cta.premium.features.4">Ad-free experience</span>
+                    </div>
+                </div>
+                <div class="pricing">
+                    <div class="plan">
+                        <h4 data-translate="cta.premium.currentPlan">Current Plan</h4>
+                        <div class="price">
+                            <span class="current-plan" id="current-plan">Free</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-upgrade" id="upgrade-button">
+                    <span data-translate="cta.premium.button">Upgrade Now</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Find Your Perfect Roommate?</h2>
+            <p>Join thousands of happy roommates who found their match on Roomus.</p>
+            <a href="app/register.html" class="btn btn-primary">Get Started for Free</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Roomus</h3>
+                    <p>Helping you find the perfect roommate since 2023.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>Email: info@roomus.com</p>
+                    <p>Phone: +31 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Roomus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

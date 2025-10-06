@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Premium Features</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .premium-feature {
+            display: none;
+            padding: 10px;
+            margin: 10px 0;
+            background: #f0f8ff;
+            border-left: 4px solid #4361ee;
+        }
+        .premium-feature.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Premium Feature Test</h1>
+    
+    <div class="test-container">
+        <h2>Premium Status</h2>
+        <p>Current Plan: <span id="current-plan">Free</span></p>
+        <button id="upgrade-button" class="btn-upgrade">Upgrade to Premium</button>
+    </div>
+
+    <div class="test-container">
+        <h2>Premium Content</h2>
+        <div class="premium-feature premium-only">
+            <h3>Exclusive Premium Content</h3>
+            <p>This content is only visible to premium users.</p>
+        </div>
+        <div class="premium-badge" style="display: none;">Premium</div>
+    </div>
+
+    <div class="test-container">
+        <h2>Premium Room Listing</h2>
+        <div class="room-card premium-listing" style="max-width: 400px;">
+            <div class="room-image">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811" alt="Premium Room" style="width:100%; height:200px; object-fit:cover;">
+                <div class="room-overlay">
+                    <span>View Details</span>
+                </div>
+            </div>
+            <div class="room-info" style="padding:15px;">
+                <h3>Luxury Loft <span class="premium-badge">Premium</span></h3>
+                <p class="price">€1,200/month</p>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> Amsterdam South</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize premium status
+        const isPremium = localStorage.getItem('isPremium') === 'true';
+        updatePremiumUI(isPremium);
+        
+        // Set up upgrade button
+        const upgradeButton = document.getElementById('upgrade-button');
+        if (upgradeButton) {
+            upgradeButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const newStatus = !isPremium;
+                localStorage.setItem('isPremium', newStatus);
+                updatePremiumUI(newStatus);
+                alert(newStatus ? '🎉 Welcome to Premium!' : 'You have switched to the free plan.');
+                window.location.reload();
+            });
+        }
+    </script>
+</body>
+</html>
