@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Board</title>
+    <link rel="stylesheet" href="../css/moodboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Mood Board</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="edit-profile.html">Profile</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main class="moodboard-container">
+        <div class="moodboard-header">
+            <h2>Inspiration & Ideas</h2>
+            <button id="addImageBtn" class="btn">
+                <i class="fas fa-plus"></i> Add Image
+            </button>
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="moodboard-grid" id="moodboardGrid">
+            <!-- Images will be added here dynamically -->
+            <div class="moodboard-item">
+                <img src="https://source.unsplash.com/random/400x300?nature" alt="Nature">
+                <div class="moodboard-item-actions">
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="moodboard-item">
+                <img src="https://source.unsplash.com/random/400x300?architecture" alt="Architecture">
+                <div class="moodboard-item-actions">
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <!-- More items will be added here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mood Board. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/moodboard.js"></script>
+</body>
+</html>

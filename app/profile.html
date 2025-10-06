@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Roomus</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .profile-avatar {
+            position: relative;
+            margin-right: 25px;
+        }
+        
+        .profile-avatar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #f0f4ff;
+        }
+        
+        .profile-info h1 {
+            margin: 0 0 5px;
+            font-size: 1.8rem;
+            color: #2d3748;
+        }
+        
+        .profile-info p {
+            margin: 5px 0;
+            color: #718096;
+        }
+        
+        .profile-location, .profile-email, .profile-phone {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .profile-location i, .profile-email i, .profile-phone i {
+            margin-right: 8px;
+            color: #4a65ff;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .profile-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn i {
+            margin-right: 6px;
+        }
+        
+        .btn-primary {
+            background-color: #4a65ff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 107, 255, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .profile-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #4a65ff;
+        }
+        
+        .about-text {
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .preference-item {
+            background: #f8fafc;
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .preference-item i {
+            margin-right: 10px;
+            color: #4a65ff;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .interest-tag {
+            background: #f0f4ff;
+            color: #4a65ff;
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin: 0 0 20px 0;
+            }
+            
+            .profile-actions {
+                justify-content: center;
+            }
+            
+            .preferences-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-home"></i>
+                <span>Roomus</span>
+            </a>
+            <button class="toggle-sidebar" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <p class="nav-section-title">MAIN</p>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="matches.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>Matches</span>
+                </a>
+                <a href="messages.html" class="nav-link">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Messages</span>
+                </a>
+                <a href="profile.html" class="nav-link active">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">ACCOUNT</p>
+                <a href="edit-profile.html" class="nav-link">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Edit Profile</span>
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-link" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            
+            <div class="user-menu">
+                <button class="notification-btn" aria-label="Notifications">
+                    <i class="far fa-bell"></i>
+                </button>
+                
+                <div class="user-dropdown">
+                    <button class="user-avatar" aria-label="User menu">
+                        <div class="avatar-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>My Account</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="dropdownLogoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Profile Content -->
+        <div class="dashboard-content">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="avatar-placeholder" style="width: 120px; height: 120px; font-size: 3rem;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1>Yago B.</h1>
+                    <div class="profile-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Amsterdam, Netherlands</span>
+                    </div>
+                    <div class="profile-email">
+                        <i class="fas fa-envelope"></i>
+                        <span>yago@example.com</span>
+                    </div>
+                    <div class="profile-phone">
+                        <i class="fas fa-phone"></i>
+                        <span>+31 6 12345678</span>
+                    </div>
+                    <div class="profile-actions">
+                        <a href="edit-profile.html" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                        <a href="settings.html" class="btn btn-outline">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="profile-section">
+                <h3 class="section-title"><i class="fas fa-user"></i> About Me</h3>
+                <div class="about-text">
+                    <p>Hello! I'm Yago, a software developer based in Amsterdam. I love hiking, cooking, and meeting new people. I'm looking for a clean and quiet place to call home. I'm tidy, respectful, and enjoy both socializing and having my own space.</p>
+                </div>
+            </div>
+            
+            <!-- Preferences -->
+            <div class="profile-section">
+                <h3 class="section-title"><i class="fas fa-home"></i> Living Preferences</h3>
+                <div class="preferences-grid">
+                    <div class="preference-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span>Budget: €800-€1000/month</span>
+                    </div>
+                    <div class="preference-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Location: Amsterdam</span>
+                    </div>
+                    <div class="preference-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Move-in: October 2023</span>
+                    </div>
+                    <div class="preference-item">
+                        <i class="fas fa-smoking-ban"></i>
+                        <span>Non-smoker</span>
+                    </div>
+                    <div class="preference-item">
+                        <i class="fas fa-moon"></i>
+                        <span>Night owl</span>
+                    </div>
+                    <div class="preference-item">
+                        <i class="fas fa-users"></i>
+                        <span>Social</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interests -->
+            <div class="profile-section">
+                <h3 class="section-title"><i class="fas fa-heart"></i> Interests & Hobbies</h3>
+                <div class="interests-container">
+                    <span class="interest-tag">Hiking</span>
+                    <span class="interest-tag">Cooking</span>
+                    <span class="interest-tag">Photography</span>
+                    <span class="interest-tag">Yoga</span>
+                    <span class="interest-tag">Reading</span>
+                    <span class="interest-tag">Travel</span>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="profile-section">
+                <h3 class="section-title"><i class="fas fa-envelope"></i> Contact Information</h3>
+                <div class="preferences-grid">
+                    <div class="preference-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>yago@example.com</span>
+                    </div>
+                    <div class="preference-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+31 6 12345678</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="matches.html" class="mobile-nav-item">
+            <i class="fas fa-heart"></i>
+            <span>Matches</span>
+        </a>
+        <a href="messages.html" class="mobile-nav-item">
+            <i class="fas fa-comment-alt"></i>
+            <span>Messages</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item active">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    
+    <script src="../js/dashboard.js"></script>
+    <script>
+        // Add any profile-specific JavaScript here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize any components if needed
+        });
+    </script>
+</body>
+</html>

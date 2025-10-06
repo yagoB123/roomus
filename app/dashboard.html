@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Roomus</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-home"></i>
+                <span>Roomus</span>
+            </a>
+            <button class="toggle-sidebar" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <p class="nav-section-title">MAIN</p>
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="matches.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>Matches</span>
+                    <span class="badge">3</span>
+                </a>
+                <a href="messages.html" class="nav-link">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Messages</span>
+                    <span class="badge">5</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">DISCOVER</p>
+                <a href="browse.html" class="nav-link">
+                    <i class="fas fa-search"></i>
+                    <span>Browse Roommates</span>
+                </a>
+                <a href="rooms.html" class="nav-link">
+                    <i class="fas fa-door-open"></i>
+                    <span>Available Rooms</span>
+                </a>
+                <a href="compatibility.html" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span>Compatibility Test</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">ACCOUNT</p>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-link" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for roommates, locations...">
+            </div>
+            
+            <div class="user-menu">
+                <a href="../index.html#premium" class="premium-btn">
+                    <i class="fas fa-crown"></i>
+                    <span>Go Premium</span>
+                </a>
+                <button class="notification-btn" aria-label="Notifications">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-badge"></span>
+                </button>
+                <div class="notification-dropdown">
+                    <div class="notification-dropdown-content">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="user-dropdown">
+                    <button class="user-avatar" aria-label="User menu">
+                        <img src="" alt="User">
+                        <span>Sarah J.</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu">
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> My Profile
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" id="dropdownLogoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h1>Welcome back</h1>
+                    <p>You have <strong>3 new matches</strong> and <strong>5 unread messages</strong>.</p>
+                </div>
+                <div class="welcome-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i> Find Roommates
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-edit"></i> Complete Profile
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #e3f2fd;">
+                        <i class="fas fa-heart" style="color: #2196f3;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>24</h3>
+                        <p>Total Matches</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #e8f5e9;">
+                        <i class="fas fa-comment" style="color: #4caf50;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>5</h3>
+                        <p>Unread Messages</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #fff3e0;">
+                        <i class="fas fa-eye" style="color: #ff9800;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>156</h3>
+                        <p>Profile Views</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #f3e5f5;">
+                        <i class="fas fa-star" style="color: #9c27b0;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>4.8</h3>
+                        <p>Your Rating</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Matches -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recent Matches</h2>
+                    <a href="matches.html" class="view-all">View All</a>
+                </div>
+                
+                <div class="matches-grid">
+                    <div class="match-card">
+                        <div class="match-photo" style="background-image: url('https://via.placeholder.com/70x70');">
+                            <span class="online-status"></span>
+                        </div>
+                        <div class="match-info">
+                            <h3>Emma W.</h3>
+                            <p>Amsterdam • 24</p>
+                            <div class="compatibility">
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: 92%;"></div>
+                                </div>
+                                <span>92%</span>
+                            </div>
+                        </div>
+                        <div class="match-actions">
+                            <button class="btn-icon" title="Send message">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="btn-icon" title="View profile">
+                                <i class="fas fa-user"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="match-card">
+                        <div class="match-photo" style="background-image: url('https://via.placeholder.com/70x70');">
+                            <span class="online-status"></span>
+                        </div>
+                        <div class="match-info">
+                            <h3>David K.</h3>
+                            <p>Rotterdam • 27</p>
+                            <div class="compatibility">
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: 88%;"></div>
+                                </div>
+                                <span>88%</span>
+                            </div>
+                        </div>
+                        <div class="match-actions">
+                            <button class="btn-icon" title="Send message">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="btn-icon" title="View profile">
+                                <i class="fas fa-user"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="match-card">
+                        <div class="match-photo" style="background-image: url('https://via.placeholder.com/70x70');">
+                            <span class="online-status offline"></span>
+                        </div>
+                        <div class="match-info">
+                            <h3>Sophie L.</h3>
+                            <p>Utrecht • 25</p>
+                            <div class="compatibility">
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: 85%;"></div>
+                                </div>
+                                <span>85%</span>
+                            </div>
+                        </div>
+                        <div class="match-actions">
+                            <button class="btn-icon" title="Send message">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <button class="btn-icon" title="View profile">
+                                <i class="fas fa-user"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Messages -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recent Messages</h2>
+                    <a href="messages.html" class="view-all">View All</a>
+                </div>
+                
+                <div class="messages-list">
+                    <a href="chat.html?user=emma" class="message-item unread">
+                        <div class="message-avatar" style="background-image: url('https://via.placeholder.com/50x50');"></div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h3>Emma W.</h3>
+                                <span class="message-time">10 min ago</span>
+                            </div>
+                            <p class="message-preview">Hey! I really like your profile. When are you looking to move in?</p>
+                        </div>
+                        <span class="unread-badge"></span>
+                    </a>
+                    
+                    <a href="chat.html?user=david" class="message-item unread">
+                        <div class="message-avatar" style="background-image: url('https://via.placeholder.com/50x50');"></div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h3>David K.</h3>
+                                <span class="message-time">1 hour ago</span>
+                            </div>
+                            <p class="message-preview">Are you free this weekend to check out the apartment?</p>
+                        </div>
+                        <span class="unread-badge"></span>
+                    </a>
+                    
+                    <a href="chat.html?user=sophie" class="message-item">
+                        <div class="message-avatar" style="background-image: url('https://via.placeholder.com/50x50');"></div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h3>Sophie L.</h3>
+                                <span class="message-time">3 hours ago</span>
+                            </div>
+                            <p class="message-preview">Thanks for the info! I'll get back to you soon.</p>
+                        </div>
+                    </a>
+                    
+                    <a href="chat.html?user=michael" class="message-item">
+                        <div class="message-avatar" style="background-image: url('https://via.placeholder.com/50x50');"></div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h3>Michael B.</h3>
+                                <span class="message-time">Yesterday</span>
+                            </div>
+                            <p class="message-preview">Great! Let's meet next week then.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recommended Roommates -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recommended For You</h2>
+                    <a href="browse.html" class="view-all">View All</a>
+                </div>
+                
+                <div class="roommates-grid">
+                    <div class="roommate-card">
+                        <div class="roommate-photo" style="background-image: url('https://via.placeholder.com/300x200');">
+                            <span class="online-status"></span>
+                            <button class="like-btn" title="Like">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="roommate-info">
+                            <h3>Lisa M.</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Amsterdam</p>
+                            <div class="compatibility">
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: 89%;"></div>
+                                </div>
+                                <span>89% match</span>
+                            </div>
+                            <div class="roommate-details">
+                                <span><i class="fas fa-home"></i> Looking for room</span>
+                                <span><i class="fas fa-euro-sign"></i> €600-800</span>
+                            </div>
+                            <div class="roommate-tags">
+                                <span class="tag">Clean</span>
+                                <span class="tag">Non-smoker</span>
+                                <span class="tag">Student</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="roommate-card">
+                        <div class="roommate-photo" style="background-image: url('');">
+                            <span class="online-status offline"></span>
+                            <button class="like-btn" title="Like">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="roommate-info">
+                            <h3>Thomas R.</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Rotterdam</p>
+                            <div class="compatibility">
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: 87%;"></div>
+                                </div>
+                                <span>87% match</span>
+                            </div>
+                            <div class="roommate-details">
+                                <span><i class="fas fa-home"></i> Has a room</span>
+                                <span><i class="fas fa-euro-sign"></i> €700</span>
+                            </div>
+                            <div class="roommate-tags">
+                                <span class="tag">Pet-friendly</span>
+                                <span class="tag">Vegetarian</span>
+                                <span class="tag">Professional</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="roommate-card">
+                        <div class="roommate-photo" style="background-image: url('');">
+                            <span class="online-status"></span>
+                            <button class="like-btn" title="Like">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="roommate-info">
+                            <h3>Anna K.</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> The Hague</p>
+                            <div class="compatibility">
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: 91%;"></div>
+                                </div>
+                                <span>91% match</span>
+                            </div>
+                            <div class="roommate-details">
+                                <span><i class="fas fa-home"></i> Looking for roommate</span>
+                                <span><i class="fas fa-euro-sign"></i> €750</span>
+                            </div>
+                            <div class="roommate-tags">
+                                <span class="tag">Quiet</span>
+                                <span class="tag">Non-smoker</span>
+                                <span class="tag">Student</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="matches.html" class="mobile-nav-item">
+            <i class="fas fa-heart"></i>
+            <span>Matches</span>
+        </a>
+        <a href="messages.html" class="mobile-nav-item">
+            <i class="fas fa-comment-alt"></i>
+            <span>Messages</span>
+            <span class="mobile-badge">5</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    
+    <script src="../js/main.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>
