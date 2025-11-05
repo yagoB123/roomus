@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections - Roomus</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/connections.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="connections-page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-home"></i>
+                <span>Roomus</span>
+            </a>
+            <button class="toggle-sidebar" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <p class="nav-section-title">MAIN</p>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="connections.html" class="nav-link active">
+                    <i class="fas fa-users"></i>
+                    <span>Connections</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">DISCOVER</p>
+                <a href="find-matches.html" class="nav-link">
+                    <i class="fas fa-fire"></i>
+                    <span>Find Matches</span>
+                </a>
+                <a href="rooms.html" class="nav-link">
+                    <i class="fas fa-door-open"></i>
+                    <span>Available Rooms</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">ACCOUNT</p>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-link" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchConnections" placeholder="Search connections...">
+            </div>
+            
+            <div class="user-menu">
+                <a href="../index.html#premium" class="premium-btn">
+                    <i class="fas fa-crown"></i>
+                    <span>Go Premium</span>
+                </a>
+                <button class="notification-btn" aria-label="Notifications">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-badge"></span>
+                </button>
+                
+                <div class="user-dropdown">
+                    <button class="user-avatar" aria-label="User menu">
+                        <img src="" alt="User">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Connections Content -->
+        <div class="connections-container">
+            <!-- Tabs -->
+            <div class="connections-tabs">
+                <button class="tab-btn active" data-tab="matches">
+                    <i class="fas fa-heart"></i> Matches
+                </button>
+                <button class="tab-btn" data-tab="messages">
+                    <i class="fas fa-comment-alt"></i> Messages
+                </button>
+            </div>
+            
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Matches Tab -->
+                <div class="tab-pane active" id="matches-tab">
+                    <div class="matches-grid" id="matchesContainer">
+                        <!-- Matches will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <div class="no-matches" id="noMatches">
+                        <i class="fas fa-users"></i>
+                        <h3>No matches yet</h3>
+                        <p>Start swiping to find your perfect roommate!</p>
+                        <a href="find-matches.html" class="btn-primary">Find Matches</a>
+                    </div>
+                </div>
+                
+                <!-- Messages Tab -->
+                <div class="tab-pane" id="messages-tab">
+                    <div class="conversations-list" id="conversationsList">
+                        <!-- Conversations will be loaded here by JavaScript -->
+                    </div>
+                    
+                    <div class="no-conversations" id="noConversations">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>No messages yet</h3>
+                        <p>Match with someone to start a conversation!</p>
+                        <a href="find-matches.html" class="btn-primary">Find Matches</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Area (initially hidden) -->
+        <div class="chat-overlay" id="chatOverlay">
+            <div class="chat-container" id="chatContainer">
+                <!-- Chat will be loaded here when a conversation is selected -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- New Message Modal -->
+    <div class="modal" id="newMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Message</h3>
+                <button class="close-modal" id="closeNewMessageModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-users">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchUserInput" placeholder="Search for users...">
+                </div>
+                <div class="users-list" id="usersList">
+                    <!-- Users will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="find-matches.html" class="mobile-nav-item">
+            <i class="fas fa-fire"></i>
+            <span>Matches</span>
+        </a>
+        <a href="connections.html" class="mobile-nav-item active">
+            <i class="fas fa-users"></i>
+            <span>Connections</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    
+    <!-- Scripts -->
+    <script src="js/auth-check.js"></script>
+    <script src="js/connections.js"></script>
+</body>
+</html>

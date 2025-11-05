@@ -30,15 +30,10 @@
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="matches.html" class="nav-link">
-                    <i class="fas fa-heart"></i>
-                    <span>Matches</span>
-                    <span class="badge">3</span>
-                </a>
-                <a href="messages.html" class="nav-link">
-                    <i class="fas fa-comment-alt"></i>
-                    <span>Messages</span>
-                    <span class="badge">5</span>
+                <a href="connections.html" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Connections</span>
+                    <span class="unread-count" id="connectionsBadge"></span>
                 </a>
                 <a href="profile.html" class="nav-link">
                     <i class="fas fa-user"></i>
@@ -48,15 +43,15 @@
             
             <div class="nav-section">
                 <p class="nav-section-title">DISCOVER</p>
-                <a href="browse.html" class="nav-link">
-                    <i class="fas fa-search"></i>
-                    <span>Browse Roommates</span>
+                <a href="find-matches.html" class="nav-link">
+                    <i class="fas fa-fire"></i>
+                    <span>Find Matches</span>
                 </a>
                 <a href="rooms.html" class="nav-link">
                     <i class="fas fa-door-open"></i>
                     <span>Available Rooms</span>
                 </a>
-                <a href="compatibility.html" class="nav-link">
+                <a href="../compatibility-test.html" class="nav-link">
                     <i class="fas fa-star"></i>
                     <span>Compatibility Test</span>
                 </a>
@@ -125,21 +120,6 @@
         
         <!-- Dashboard Content -->
         <div class="dashboard-content">
-            <div class="welcome-banner">
-                <div class="welcome-text">
-                    <h1>Welcome back</h1>
-                    <p>You have <strong>3 new matches</strong> and <strong>5 unread messages</strong>.</p>
-                </div>
-                <div class="welcome-actions">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-search"></i> Find Roommates
-                    </button>
-                    <button class="btn btn-outline">
-                        <i class="fas fa-edit"></i> Complete Profile
-                    </button>
-                </div>
-            </div>
-            
             <!-- Dashboard Stats -->
             <div class="dashboard-stats">
                 <div class="stat-card">
@@ -187,7 +167,7 @@
             <div class="dashboard-section">
                 <div class="section-header">
                     <h2>Recent Matches</h2>
-                    <a href="matches.html" class="view-all">View All</a>
+                    <a href="connections.html" class="view-all">View All</a>
                 </div>
                 
                 <div class="matches-grid">
@@ -269,7 +249,7 @@
             <div class="dashboard-section">
                 <div class="section-header">
                     <h2>Recent Messages</h2>
-                    <a href="messages.html" class="view-all">View All</a>
+                    <a href="connections.html" class="view-all">View All</a>
                 </div>
                 
                 <div class="messages-list">
@@ -423,14 +403,9 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-        <a href="matches.html" class="mobile-nav-item">
-            <i class="fas fa-heart"></i>
-            <span>Matches</span>
-        </a>
-        <a href="messages.html" class="mobile-nav-item">
-            <i class="fas fa-comment-alt"></i>
-            <span>Messages</span>
-            <span class="mobile-badge">5</span>
+        <a href="connections.html" class="mobile-nav-item">
+            <i class="fas fa-users"></i>
+            <span>Connections</span>
         </a>
         <a href="profile.html" class="mobile-nav-item">
             <i class="fas fa-user"></i>

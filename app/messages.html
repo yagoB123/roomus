@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Roomus</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/messages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="messages-page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-home"></i>
+                <span>Roomus</span>
+            </a>
+            <button class="toggle-sidebar" aria-label="Toggle sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <p class="nav-section-title">MAIN</p>
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="matches.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>Matches</span>
+                </a>
+                <a href="messages.html" class="nav-link active">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Messages</span>
+                    <span class="unread-count">2</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">DISCOVER</p>
+                <a href="find-matches.html" class="nav-link">
+                    <i class="fas fa-fire"></i>
+                    <span>Find Matches</span>
+                </a>
+                <a href="browse.html" class="nav-link">
+                    <i class="fas fa-search"></i>
+                    <span>Browse Roommates</span>
+                </a>
+                <a href="rooms.html" class="nav-link">
+                    <i class="fas fa-door-open"></i>
+                    <span>Available Rooms</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
+                <p class="nav-section-title">ACCOUNT</p>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-link" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Conversations Sidebar -->
+        <div class="conversations-sidebar">
+            <div class="conversations-header">
+                <h2>Messages</h2>
+                <button class="new-message-btn" id="newMessageBtn">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+            
+            <div class="search-conversations">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search messages...">
+            </div>
+            
+            <div class="conversations-list" id="conversationsList">
+                <!-- Conversations will be loaded here by JavaScript -->
+                <div class="no-conversations">
+                    <i class="fas fa-comment-slash"></i>
+                    <h3>No messages yet</h3>
+                    <p>Find your perfect roommate and start chatting!</p>
+                    <a href="find-matches.html" class="btn-primary">Find Matches</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Area -->
+        <div class="chat-area" id="chatArea">
+            <div class="no-chat-selected">
+                <div class="no-chat-content">
+                    <i class="fas fa-comments"></i>
+                    <h3>Select a conversation</h3>
+                    <p>Choose a conversation from the list or start a new one</p>
+                </div>
+            </div>
+            
+            <!-- Active chat will be loaded here -->
+        </div>
+    </main>
+    
+    <!-- New Message Modal -->
+    <div class="modal" id="newMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Message</h3>
+                <button class="close-modal" id="closeNewMessageModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-users">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchUserInput" placeholder="Search for users...">
+                </div>
+                <div class="users-list" id="usersList">
+                    <!-- Users will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="find-matches.html" class="mobile-nav-item">
+            <i class="fas fa-fire"></i>
+            <span>Matches</span>
+        </a>
+        <a href="messages.html" class="mobile-nav-item active">
+            <i class="fas fa-comment-alt"></i>
+            <span>Messages</span>
+        </a>
+        <a href="profile.html" class="mobile-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    
+    <!-- Scripts -->
+    <script src="js/auth-check.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html>

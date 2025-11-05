@@ -56,7 +56,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // In a real app, you would make an API call here
                 console.log('Login attempt with:', formData);
                 
-                // For demo purposes, redirect to dashboard on success
+                // Save user email to localStorage for authentication
+                localStorage.setItem('userEmail', formData.email);
+                
+                // In a real app, you would also save a proper auth token
+                if (formData.remember) {
+                    localStorage.setItem('rememberMe', 'true');
+                } else {
+                    sessionStorage.setItem('userSession', 'active');
+                }
+                
                 showAlert('Login successful! Redirecting...', 'success');
                 
                 // Reset form and button state
@@ -65,7 +74,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Redirect to dashboard after a short delay
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html';
+                    // Check if we have a redirect URL in localStorage
+                    const redirectTo = localStorage.getItem('redirectAfterLogin') || 'dashboard.html';
+                    // Clear the redirect URL after using it
+                    localStorage.removeItem('redirectAfterLogin');
+                    window.location.href = redirectTo;
                 }, 1500);
                 
             }, 1500);
@@ -140,19 +153,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     password: '••••••••' // Don't log actual password
                 });
                 
-                // For demo purposes, show success and redirect
-                showAlert('Account created successfully! Redirecting to login...', 'success');
-                
-                // Reset form and button state
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
-                
-                // Redirect to login after a short delay
+                // Simulate successful registration
                 setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 2000);
-                
-            }, 2000);
+                    // In a real app, you would make an API call here
+                    console.log('Registration data:', formData);
+                    
+                    // Save user email to localStorage
+                    localStorage.setItem('userEmail', formData.email);
+                    
+                    // Set remember me based on user preference
+                    if (formData.terms) {
+                        localStorage.setItem('rememberMe', 'true');
+                    } else {
+                        sessionStorage.setItem('userSession', 'active');
+                    }
+                    
+                    showAlert('Registration successful! Setting up your account...', 'success');
+                    
+                    // Reset form and button state
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                    
+                    // Redirect to dashboard after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                    
+                }, 1500);
+            }, 1500);
         });
     }
     

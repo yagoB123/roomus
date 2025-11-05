@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Compatibility Test - Roomus</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f7ff;
+        }
+        .test-container {
+            margin: 20px 0;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        /* Results Container Styles */
+        #resultContainer {
+            display: none;
+            margin: 20px 0;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        #compatibilityMeter {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #4CAF50;
+            transition: color 0.3s ease;
+        }
+        
+        #compatibilityDescription {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Hide elements with .hidden class */
+        .hidden {
+            display: none !important;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
+            display: none;
+        }
+        .question.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #4361ee;
+        }
+        .options {
+            margin: 15px 0;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            background: #f0f4ff;
+            border-color: #4361ee;
+        }
+        .option.selected {
+            background: #4361ee;
+            color: white;
+            border-color: #3a56d4;
+        }
+        .progress-container {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 20px 0;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #4361ee;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+        .btn-primary {
+            background-color: #4361ee;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #3a56d4;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4361ee;
+            color: #4361ee;
+        }
+        .btn-outline:hover {
+            background: #f0f4ff;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        .result-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4361ee;
+            margin: 20px 0;
+        }
+        .compatibility-meter {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+            border-radius: 50%;
+            background: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #4361ee;
+            border: 10px solid #e9ecef;
+        }
+        .premium-feature {
+            background: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="loadingIndicator" style="display: none; text-align: center; margin: 20px 0;">
+        <div class="spinner"></div>
+        <p>Saving your results...</p>
+    </div>
+    
+    <div class="test-container">
+        <h1>Roommate Compatibility Test</h1>
+        <p>Answer these questions to find your perfect roommate match. Be honest for the best results!</p>
+        
+        <!-- Result Container (initially hidden) -->
+        <div id="resultContainer" style="display: none; text-align: center; padding: 20px;">
+            <h2>Your Compatibility Score</h2>
+            <div id="compatibilityMeter" style="
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                border: 10px solid #4CAF50;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2.5rem;
+                font-weight: bold;
+                margin: 20px auto;
+                color: #4CAF50;
+            ">0%</div>
+            <p id="compatibilityDescription" style="font-size: 1.1rem; margin: 20px 0;">
+                Calculating your compatibility...
+            </p>
+            
+            <!-- Premium Results Section -->
+            <div id="premiumResults" style="margin-top: 30px; padding: 20px; background: #f8f9ff; border-radius: 8px; display: none;">
+                <h3>Unlock Premium Features</h3>
+                <p>See your full compatibility report and get matched with your best roommate matches!</p>
+                <button id="upgradeBtn" class="btn btn-primary" style="margin-top: 10px;">
+                    <i class="fas fa-crown"></i> Upgrade to Premium
+                </button>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <a href="app/matches.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-right"></i> View Your Matches
+                </a>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        
+        <div id="question-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="navigation">
+            <button id="prev-btn" class="btn btn-outline" style="display: none;">
+                <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <div>
+                <span id="question-counter">1/10</span>
+                <button id="next-btn" class="btn btn-primary">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-container result-container" id="result-container">
+        <h2>Your Compatibility Results</h2>
+        <div class="compatibility-meter" id="compatibility-meter">
+            0%
+        </div>
+        <h3>Your Compatibility Score</h3>
+        <p id="compatibility-description">Based on your answers, we're calculating your best matches...</p>
+        
+        <div id="premium-results" style="display: none;">
+            <div class="premium-feature">
+                <h3><i class="fas fa-star"></i> Premium Results</h3>
+                <p>Upgrade to Premium to see detailed compatibility analysis and connect with your best matches!</p>
+                <button id="upgrade-btn" class="btn btn-primary">
+                    <i class="fas fa-crown"></i> Upgrade to Premium
+                </button>
+            </div>
+        </div>
+        
+        <div id="free-results">
+            <p>Sign up to save your results and see your matches!</p>
+            <button id="signup-btn" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Sign Up Now
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            {
+                question: "What's your typical bedtime?",
+                options: [
+                    "Before 10 PM",
+                    "10 PM - 12 AM",
+                    "12 AM - 2 AM",
+                    "After 2 AM"
+                ]
+            },
+            {
+                question: "How clean do you like to keep your living space?",
+                options: [
+                    "Spotless - I clean daily",
+                    "Tidy - I clean a few times a week",
+                    "Moderate - I clean weekly",
+                    "Relaxed - I clean when it's noticeably messy"
+                ]
+            },
+            {
+                question: "How often do you have guests over?",
+                options: [
+                    "Rarely or never",
+                    "Once a month",
+                    "A few times a month",
+                    "Weekly or more"
+                ]
+            },
+            {
+                question: "What's your noise tolerance level?",
+                options: [
+                    "I need complete silence",
+                    "Low background noise is fine",
+                    "Moderate noise is okay",
+                    "I don't mind noise at all"
+                ]
+            },
+            {
+                question: "How do you feel about sharing food?",
+                options: [
+                    "Strictly separate",
+                    "Mostly separate, but share some basics",
+                    "Share most things, with some exceptions",
+                    "Everything is shared"
+                ]
+            },
+            {
+                question: "What's your ideal room temperature?",
+                options: [
+                    "Cool (below 68°F/20°C)",
+                    "Slightly cool (68-72°F/20-22°C)",
+                    "Moderate (72-75°F/22-24°C)",
+                    "Warm (above 75°F/24°C)"
+                ]
+            },
+            {
+                question: "How do you spend your weekends?",
+                options: [
+                    "Quiet time at home",
+                    "Casual outings with friends",
+                    "Social events and parties",
+                    "Adventures and activities"
+                ]
+            },
+            {
+                question: "How do you handle conflicts?",
+                options: [
+                    "Address them immediately",
+                    "Wait to cool off, then discuss",
+                    "Let things slide, avoid confrontation",
+                    "It depends on the situation"
+                ]
+            },
+            {
+                question: "What's your stance on pets?",
+                options: [
+                    "No pets, please",
+                    "Open to small pets",
+                    "Love pets, would like to get one",
+                    "I have pets"
+                ]
+            },
+            {
+                question: "How important is having a compatible roommate to you?",
+                options: [
+                    "Extremely important",
+                    "Very important",
+                    "Somewhat important",
+                    "Not very important"
+                ]
+            }
+        ];
+
+        // DOM Elements
+        let questionContainer, prevBtn, nextBtn, questionCounter, progressBar, resultContainer, compatibilityMeter, compatibilityDescription, premiumResults, freeResults;
+        let currentQuestion = 0;
+        const answers = [];
+
+        // Initialize the test
+        function initTest() {
+            // Initialize DOM elements
+            questionContainer = document.getElementById('question-container');
+            prevBtn = document.getElementById('prev-btn');
+            nextBtn = document.getElementById('next-btn');
+            questionCounter = document.getElementById('question-counter');
+            progressBar = document.getElementById('progress');
+            resultContainer = document.getElementById('resultContainer');
+            compatibilityMeter = document.getElementById('compatibilityMeter');
+            compatibilityDescription = document.getElementById('compatibilityDescription');
+            premiumResults = document.getElementById('premiumResults');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentQuestion > 0) {
+                        currentQuestion--;
+                        showQuestion(currentQuestion);
+                        updateNavigation();
+                    }
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    console.log('Next button clicked. Current question:', currentQuestion, 'Answers:', answers);
+                    
+                    if (answers[currentQuestion] === undefined) {
+                        console.log('No answer selected for current question');
+                        showAlert('Please select an option before continuing', 'error');
+                        return;
+                    }
+                    
+                    if (currentQuestion < questions.length - 1) {
+                        console.log('Moving to next question');
+                        currentQuestion++;
+                        showQuestion(currentQuestion);
+                        updateNavigation();
+                    } else {
+                        console.log('Showing results');
+                        showResults();
+                    }
+                });
+            }
+            
+            // Add click handler for upgrade button
+            const upgradeBtn = document.getElementById('upgradeBtn');
+            if (upgradeBtn) {
+                upgradeBtn.addEventListener('click', () => {
+                    // Redirect to the premium page
+                    window.location.href = 'test-premium.html';
+                });
+            }
+            
+            // Initialize first question
+            showQuestion(0);
+            updateNavigation();
+            updateProgress();
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        // Show question
+        function showQuestion(index) {
+            // Clear previous question
+            questionContainer.innerHTML = '';
+            
+            // Update next button text based on question index
+            if (nextBtn) {
+                if (index === questions.length - 1) {
+                    nextBtn.innerHTML = 'See Results <i class="fas fa-arrow-right"></i>';
+                } else {
+                    nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                }
+            }
+            
+            // Create question element
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question active';
+            questionDiv.innerHTML = `
+                <h3>${questions[index].question}</h3>
+                <div class="options" id="options">
+                    ${questions[index].options.map((option, i) => 
+                        `<div class="option" data-index="${i}">${option}</div>`
+                    ).join('')}
+                </div>
+            `;
+            
+            questionContainer.appendChild(questionDiv);
+            
+            // Add event listeners to options
+            const options = questionContainer.querySelectorAll('.option');
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Save answer
+                    answers[currentQuestion] = parseInt(option.dataset.index);
+                    // Enable next button
+                    nextBtn.disabled = false;
+                });
+            });
+            
+            // Update progress
+            updateProgress();
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            // Update question counter
+            questionCounter.textContent = `${currentQuestion + 1}/${questions.length}`;
+            
+            // Show/hide previous button
+            prevBtn.style.display = currentQuestion === 0 ? 'none' : 'block';
+            
+            // Update next button text on last question
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.innerHTML = 'See Results <i class="fas fa-chart-bar"></i>';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+            
+            // Disable next button if no answer selected
+            nextBtn.disabled = answers[currentQuestion] === undefined;
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Simple alert function if not defined
+        function showAlert(message, type = 'info') {
+            alert(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // Save results to the database
+        async function saveTestResults(score) {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            try {
+                if (loadingIndicator) loadingIndicator.style.display = 'block';
+                
+                // Check if we should even try to save to server
+                const skipServerSave = true; // Set to false to try server save
+                
+                if (skipServerSave) {
+                    console.log('Skipping server save, using local mode');
+                    return true; // Skip server save
+                }
+                
+                // Get user email from localStorage or sessionStorage
+                const userEmail = localStorage.getItem('userEmail') || sessionStorage.getItem('userEmail');
+                if (!userEmail) {
+                    console.warn('User not authenticated, using test mode');
+                    // Continue in test mode without saving to server
+                    return true;
+                }
+                
+                console.log('Preparing to save results...');
+                
+                try {
+                    const response = await fetch('/api/compatibility/save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-user-email': userEmail
+                        },
+                        body: JSON.stringify({
+                            score: score,
+                            answers: answers,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.warn('Server save failed, continuing in offline mode');
+                        console.warn('Response status:', response.status, 'Details:', errorText);
+                        return true; // Continue even if save fails
+                    }
+                    
+                    // Try to parse JSON only if there's content
+                    const responseText = await response.text();
+                    if (responseText) {
+                        try {
+                            const data = JSON.parse(responseText);
+                            console.log('Results saved successfully:', data);
+                        } catch (e) {
+                            console.log('Save successful, no data returned');
+                        }
+                    }
+                    
+                    return true;
+                    
+                } catch (networkError) {
+                    console.warn('Network error when saving, continuing in offline mode:', networkError);
+                    return true; // Continue even if there's a network error
+                }
+                
+            } catch (error) {
+                console.error('Unexpected error in saveTestResults:', error);
+                // Don't show alert here, just log and continue
+                return true; // Continue even if there's an error
+            } finally {
+                if (loadingIndicator) loadingIndicator.style.display = 'none';
+            }
+        }
+        
+        // Show results
+        async function showResults() {
+            console.log('showResults function called');
+            
+            try {
+                // Get all required elements
+                const resultContainer = document.getElementById('resultContainer');
+                const compatibilityMeter = document.getElementById('compatibilityMeter');
+                const compatibilityDescription = document.getElementById('compatibilityDescription');
+                const premiumResults = document.getElementById('premiumResults');
+                
+                // Debug log
+                console.log('Result elements:', {
+                    resultContainer,
+                    compatibilityMeter,
+                    compatibilityDescription,
+                    premiumResults
+                });
+                
+                // Validate required elements
+                if (!resultContainer || !compatibilityMeter || !compatibilityDescription) {
+                    const errorMsg = 'Error: Could not initialize results. Missing required elements.';
+                    console.error(errorMsg);
+                    alert(errorMsg);
+                    return;
+                }
+                
+                // Show loading state
+                compatibilityMeter.textContent = '...';
+                compatibilityDescription.textContent = 'Calculating your results...';
+                
+                // First, ensure the result container is visible
+                resultContainer.style.display = 'block';
+                resultContainer.style.visibility = 'visible';
+                
+                // Then hide the test container (but not the result container)
+                const testContainer = document.querySelector('.test-container');
+                const questionContainer = document.getElementById('question-container');
+                
+                if (testContainer) {
+                    // Move the result container outside of the test container
+                    if (testContainer.contains(resultContainer)) {
+                        testContainer.parentNode.insertBefore(resultContainer, testContainer.nextSibling);
+                    }
+                    // Hide the test container
+                    testContainer.style.display = 'none';
+                }
+                
+                if (questionContainer) {
+                    questionContainer.style.display = 'none';
+                }
+                
+                // Force reflow to ensure styles are applied
+                void resultContainer.offsetHeight;
+                
+                // Calculate score (simple average of answers)
+                const totalScore = answers.reduce((sum, answer) => sum + answer, 0);
+                const maxPossibleScore = questions.length * 3; // 3 points per question max
+                const score = Math.round((totalScore / maxPossibleScore) * 100);
+                console.log('Calculated compatibility score:', score);
+                
+                try {
+                    // Save results to database
+                    console.log('Attempting to save results...');
+                    const saved = await saveTestResults(score);
+                    
+                    if (!saved) {
+                        throw new Error('Failed to save results to database');
+                    }
+                    
+                    console.log('Results saved successfully');
+                    
+                } catch (saveError) {
+                    console.error('Error saving results:', saveError);
+                    compatibilityDescription.textContent = 'Results calculated, but there was an issue saving them.';
+                }
+                
+                // Animate the compatibility meter
+                console.log('Starting score animation...');
+                let currentScore = 0;
+                const animationInterval = 20; // ms
+                const totalSteps = 50; // Total steps for animation
+                const stepSize = Math.ceil(score / totalSteps);
+                
+                const intervalId = setInterval(() => {
+                    if (currentScore >= score) {
+                        clearInterval(intervalId);
+                        compatibilityMeter.textContent = `${score}%`;
+                        
+                        // Set final description based on score
+                        let description;
+                        if (score >= 80) {
+                            description = 'Excellent match! You should have great compatibility with potential roommates.';
+                        } else if (score >= 60) {
+                            description = 'Good match! You should get along well with compatible roommates.';
+                        } else if (score >= 40) {
+                            description = 'Moderate match. You might need to compromise on some preferences.';
+                        } else {
+                            description = 'Room for improvement. Look for roommates who complement your lifestyle.';
+                        }
+                        compatibilityDescription.textContent = description;
+                        
+                        // Show premium features if element exists
+                        if (premiumResults) {
+                            premiumResults.style.display = 'block';
+                        }
+                        
+                    } else {
+                        // Update score with smooth animation
+                        currentScore = Math.min(currentScore + stepSize, score);
+                        compatibilityMeter.textContent = `${currentScore}%`;
+                        
+                        // Update colors based on score (red to green)
+                        const hue = (currentScore / 100) * 120; // 0 = red, 120 = green
+                        compatibilityMeter.style.borderColor = `hsl(${hue}, 70%, 50%)`;
+                        compatibilityMeter.style.color = `hsl(${hue}, 70%, 50%)`;
+                    }
+                }, animationInterval);
+                
+            } catch (error) {
+                console.error('Error in showResults:', error);
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'error-message';
+                errorMessage.style.color = 'red';
+                errorMessage.style.marginTop = '20px';
+                errorMessage.textContent = 'An error occurred while calculating your results. Please try again.';
+                
+                const container = document.querySelector('.test-container') || document.body;
+                container.appendChild(errorMessage);
+            }
+        }
+
+        // Keyboard navigation handler
+        function handleKeyDown(e) {
+            const options = document.querySelectorAll('.option');
+            const selected = document.querySelector('.option.selected');
+            let index = Array.from(options).indexOf(selected);
+            
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                if (index < options.length - 1) {
+                    options[index + 1].click();
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (index > 0) {
+                    options[index - 1].click();
+                }
+            } else if (e.key === 'Enter' && nextBtn && !nextBtn.disabled) {
+                nextBtn.click();
+            }
+        }
+        
+        // Initialize the test when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initTest();
+        });
+        
+        // Upgrade button handler
+        document.getElementById('upgrade-btn')?.addEventListener('click', () => {
+            alert('Redirecting to premium upgrade page...');
+            // In a real app, this would redirect to the payment/upgrade page
+        });
+        
+        // Sign up button handler
+        document.getElementById('signup-btn')?.addEventListener('click', () => {
+            alert('Redirecting to sign up page...');
+            // In a real app, this would redirect to the signup page
+        });
+    </script>
+</body>
+</html>

@@ -219,6 +219,18 @@
             </div>
             
             <div class="nav-section">
+                <p class="nav-section-title">DISCOVER</p>
+                <a href="find-matches.html" class="nav-link">
+                    <i class="fas fa-fire"></i>
+                    <span>Find Matches</span>
+                </a>
+                <a href="rooms.html" class="nav-link">
+                    <i class="fas fa-door-open"></i>
+                    <span>Available Rooms</span>
+                </a>
+            </div>
+            
+            <div class="nav-section">
                 <p class="nav-section-title">ACCOUNT</p>
                 <a href="edit-profile.html" class="nav-link">
                     <i class="fas fa-user-edit"></i>
@@ -284,18 +296,18 @@
                     </div>
                 </div>
                 <div class="profile-info">
-                    <h1>Yago B.</h1>
+                    <h1 id="profileName">Loading...</h1>
                     <div class="profile-location">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Amsterdam, Netherlands</span>
+                        <span id="profileLocation">Location not set</span>
                     </div>
                     <div class="profile-email">
                         <i class="fas fa-envelope"></i>
-                        <span>yago@example.com</span>
+                        <span id="profileEmail">Email not set</span>
                     </div>
                     <div class="profile-phone">
                         <i class="fas fa-phone"></i>
-                        <span>+31 6 12345678</span>
+                        <span id="profilePhone">Phone not set</span>
                     </div>
                     <div class="profile-actions">
                         <a href="edit-profile.html" class="btn btn-primary">
@@ -350,13 +362,9 @@
             <!-- Interests -->
             <div class="profile-section">
                 <h3 class="section-title"><i class="fas fa-heart"></i> Interests & Hobbies</h3>
-                <div class="interests-container">
-                    <span class="interest-tag">Hiking</span>
-                    <span class="interest-tag">Cooking</span>
-                    <span class="interest-tag">Photography</span>
-                    <span class="interest-tag">Yoga</span>
-                    <span class="interest-tag">Reading</span>
-                    <span class="interest-tag">Travel</span>
+                <div id="interestsContainer" class="interests-container" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <!-- Interests will be loaded here -->
+                    <span class="no-interests">No interests added yet</span>
                 </div>
             </div>
             
@@ -397,11 +405,115 @@
         </a>
     </nav>
     
+    <script src="../js/auth-check.js"></script>
     <script src="../js/dashboard.js"></script>
+    
+    <style>
+        .interest-tag {
+            background: #e9ecef;
+            border-radius: 20px;
+            padding: 5px 12px;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin: 0 5px 5px 0;
+        }
+        .no-interests {
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
     <script>
-        // Add any profile-specific JavaScript here
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize any components if needed
+        // Load and display profile data
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedProfile = localStorage.getItem('userProfile');
+            
+            if (savedProfile) {
+                const profile = JSON.parse(savedProfile);
+                
+                // Update basic info
+                document.getElementById('profileName').textContent = `${profile.firstName || ''} ${profile.lastName || ''}`.trim() || 'Your Name';
+                document.getElementById('profileLocation').textContent = profile.location || 'Location not set';
+                document.getElementById('profileEmail').textContent = profile.email || 'Email not set';
+                document.getElementById('profilePhone').textContent = profile.phone || 'Phone not set';
+                
+                // Update about section
+                const aboutSection = document.querySelector('.about-text p');
+                if (aboutSection && profile.about) {
+                    aboutSection.textContent = profile.about;
+                }
+                
+                // Update preferences
+                if (profile.budget) {
+                    const budgetElement = document.querySelector('.preferences-grid .preference-item:first-child span');
+                    if (budgetElement) {
+                        budgetElement.textContent = `Budget: €${profile.budget.min}-€${profile.budget.max}/month`;
+                    }
+                }
+                
+                // Update move-in date
+                if (profile.moveInDate) {
+                    const dateElement = document.querySelector('.preferences-grid .preference-item:nth-child(3) span');
+                    if (dateElement) {
+                        const options = { year: 'numeric', month: 'long' };
+                        const formattedDate = new Date(profile.moveInDate).toLocaleDateString(undefined, options);
+                        dateElement.textContent = `Move-in: ${formattedDate}`;
+                    }
+                }
+                
+                // Update lifestyle preferences
+                if (Array.isArray(profile.lifestyle)) {
+                    const lifestyleIcons = {
+                        'non-smoker': { icon: 'smoking-ban', text: 'Non-smoker' },
+                        'night_owl': { icon: 'moon', text: 'Night owl' },
+                        'social': { icon: 'users', text: 'Social' },
+                        'clean': { icon: 'broom', text: 'Clean Freak' },
+                        'pets': { icon: 'paw', text: 'Pets Allowed' },
+                        'vegetarian': { icon: 'leaf', text: 'Vegetarian' }
+                    };
+                    
+                    const preferencesGrid = document.querySelector('.preferences-grid');
+                    if (preferencesGrid) {
+                        // Clear existing preferences except the first three (budget, location, move-in date)
+                        while (preferencesGrid.children.length > 3) {
+                            preferencesGrid.removeChild(preferencesGrid.lastChild);
+                        }
+                        
+                        // Add lifestyle preferences
+                        profile.lifestyle.forEach(pref => {
+                            if (lifestyleIcons[pref]) {
+                                const prefItem = document.createElement('div');
+                                prefItem.className = 'preference-item';
+                                prefItem.innerHTML = `
+                                    <i class="fas fa-${lifestyleIcons[pref].icon}"></i>
+                                    <span>${lifestyleIcons[pref].text}</span>
+                                `;
+                                preferencesGrid.appendChild(prefItem);
+                            }
+                        });
+                    }
+                }
+                
+                // Update avatar if exists
+                if (profile.avatar) {
+                    const avatarPlaceholder = document.querySelector('.profile-avatar .avatar-placeholder');
+                    if (avatarPlaceholder) {
+                        avatarPlaceholder.innerHTML = `<img src="${profile.avatar}" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+                    }
+                }
+                
+                // Update interests
+                const interestsContainer = document.getElementById('interestsContainer');
+                if (profile.interests && profile.interests.length > 0) {
+                    interestsContainer.innerHTML = ''; // Clear the "No interests" message
+                    profile.interests.forEach(interest => {
+                        const tag = document.createElement('span');
+                        tag.className = 'interest-tag';
+                        tag.textContent = interest;
+                        interestsContainer.appendChild(tag);
+                    });
+                }
+            }
         });
     </script>
 </body>
